@@ -2,7 +2,8 @@ import numpy as np
 from numpy import linalg as LA
 from sklearn.utils.extmath import randomized_svd
 
-def dynamic_mode_decomposition(data, rank):
+def dmd(data, rank):
+    '''Dynamic mode decomposition.'''
     #data matrices
     X = data[:,:-1]
     Y = data[:,1:]
@@ -20,8 +21,9 @@ def dynamic_mode_decomposition(data, rank):
     
     return eig_values, dmd_modes
 
-def dmd_forecast(data, rank, num_forecasts):
-    eig_values, dmd_modes = dynamic_mode_decomposition(data, rank)
+def forecast(data, rank, num_forecasts):
+    '''Forecast timeseries data using the dynamic mode decomposition.'''
+    eig_values, dmd_modes = dmd(data, rank)
     diag_eig_values = np.diag(eig_values)
 
     initial_condition = data[:,-1] #uses last vector in data for initial condition

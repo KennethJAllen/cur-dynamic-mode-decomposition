@@ -8,8 +8,8 @@ The goal of this notebook is to demonstrate the dynamic mode decomposition by fo
 ### Clone the Repository:
 
 ```
-git clone https://github.com/KennethJAllen/YGO-small-world
-cd YGO-small-world
+git clone https://github.com/KennethJAllen/dynamic-mode-decomposition
+cd dynamic-mode-decomposition
 ```
 ### Install Dependencies with Poetry:
 

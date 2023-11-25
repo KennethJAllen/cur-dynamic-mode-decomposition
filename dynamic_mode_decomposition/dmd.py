@@ -1,15 +1,30 @@
 import numpy as np
 from numpy import linalg as LA
-from sklearn.utils.extmath import randomized_svd
+import sklearn.utils.extmath as skmath
 
-def dmd(data, rank):
-    '''Dynamic mode decomposition.'''
+def dmd(data: np.ndarray, rank: int) -> tuple[np.ndarray, np.ndarray]:
+    '''
+    Performs Dynamic Mode Decomposition on time series data.
+
+    Parameters:
+    data (np.ndarray): Time series data where each column is a time snapshot.
+    rank (int): Number of singular values for SVD decomposition.
+
+    Returns:
+    Tuple[np.ndarray, np.ndarray]: Eigenvalues and DMD modes of the dataset.
+
+    Example:
+    >>> eig_values, dmd_modes = dmd(np.random.rand(100, 10), 5)
+    '''
+    if rank > min(data.shape):
+        raise ValueError("The rank must be smaller than each dimension of the data.")
+    
     #data matrices
     X = data[:,:-1]
     Y = data[:,1:]
 
     #SVD
-    U, Sigma, VT = randomized_svd(X, n_components=rank, random_state=None)
+    U, Sigma, VT = skmath.randomized_svd(X, n_components=rank, random_state=None)
 
     #Koopman operator
     inv_Sigma = np.reciprocal(Sigma)
@@ -18,7 +33,7 @@ def dmd(data, rank):
     #DMD modes
     eig_values, W = LA.eig(A_tilde)
     dmd_modes = Y @ VT.T * inv_Sigma @ W #corresponds to eigenvectors of timestep operator A such that AX=Y
-    
+
     return eig_values, dmd_modes
 
 def forecast(data, rank, num_forecasts):

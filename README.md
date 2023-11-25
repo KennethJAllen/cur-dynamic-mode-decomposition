@@ -3,6 +3,28 @@
 ## Introduction
 The goal of this notebook is to demonstrate the dynamic mode decomposition by forecasting time series data from the M5 forecasting competition. The dynamic mode decomposition is a dimensionality reduction algorithm developed by Peter Schmid in 2008.
 
+## 🔧 Installation
+
+### Clone the Repository:
+
+```
+git clone https://github.com/KennethJAllen/YGO-small-world
+cd YGO-small-world
+```
+### Install Dependencies with Poetry:
+
+*   Install Poetry if not already installed.
+*   Run the following command in the project directory:
+
+```
+poetry install
+```
+### Activate the Virtual Environment:
+```
+poetry shell
+```
+You can now run the project's scripts within the poetry shell.
+
 ## Dynamic Mode Decomposition
 The dynamic mode decomposition, originally developed for fluid dynamics simulation, was designed to extract features from high dimensional data.
 

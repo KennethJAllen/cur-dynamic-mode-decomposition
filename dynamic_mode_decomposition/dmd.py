@@ -18,21 +18,21 @@ def dmd(data: np.ndarray, rank: int) -> tuple[np.ndarray, np.ndarray]:
     '''
     if rank > min(data.shape):
         raise ValueError("The rank must be smaller than each dimension of the data.")
-    
-    #data matrices
-    X = data[:,:-1]
-    Y = data[:,1:]
 
-    #SVD
-    U, Sigma, VT = skmath.randomized_svd(X, n_components=rank, random_state=None)
+    # data matrices
+    x = data[:,:-1]
+    y = data[:,1:]
 
-    #Koopman operator
-    inv_Sigma = np.reciprocal(Sigma)
-    A_tilde = U.T @ Y @ VT.T * inv_Sigma
+    # SVD
+    u, sigma, vt = skmath.randomized_svd(x, n_components = rank, random_state = None)
 
-    #DMD modes
-    eig_values, W = LA.eig(A_tilde)
-    dmd_modes = Y @ VT.T * inv_Sigma @ W #corresponds to eigenvectors of timestep operator A such that AX=Y
+    # Koopman operator
+    inv_sigma = np.reciprocal(sigma)
+    a_tilde = u.T @ y @ vt.T * inv_sigma
+
+    # DMD modes
+    eig_values, w = LA.eig(a_tilde)
+    dmd_modes = y @ vt.T * inv_sigma @ w # corresponds to eigenvectors of timestep operator a such that ax = y
 
     return eig_values, dmd_modes
 
@@ -41,15 +41,16 @@ def forecast(data, rank, num_forecasts):
     eig_values, dmd_modes = dmd(data, rank)
     diag_eig_values = np.diag(eig_values)
 
-    initial_condition = data[:,-1] #uses last vector in data for initial condition
+    initial_condition = data[:,-1] # uses last vector in data for initial condition
     data_dimension = initial_condition.shape[0]
     forecast_results = np.zeros((data_dimension, num_forecasts), dtype=np.complex_)
 
-    #time stepping
+    # time stepping
     low_dim_forecast = LA.lstsq(dmd_modes, initial_condition, rcond=None)[0]
     for t in range(num_forecasts):
         low_dim_forecast = diag_eig_values @ low_dim_forecast
         forecast_results[:,t] =  dmd_modes @ low_dim_forecast
-    forecast_results = forecast_results.real
-    forecast_results[forecast_results<0] = 0 #set negative values in result to zero
+
+    forecast_results = forecast_results.real # take real component of results
+    forecast_results[forecast_results<0] = 0 # set negative values in result to zero
     return forecast_results

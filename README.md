@@ -1,7 +1,7 @@
 # Dynamic Mode Decomposition
 
 ## Introduction
-The goal of this notebook is to demonstrate the dynamic mode decomposition by forecasting time series data from the M5 forecasting competition. The dynamic mode decomposition is a dimensionality reduction algorithm developed by Peter Schmid in 2008.
+Demonstrates the dynamic mode decomposition by forecasting time series data from the M5 forecasting competition. The dynamic mode decomposition is a dimensionality reduction algorithm developed by Peter Schmid in 2008.
 
 ## 🔧 Installation
 

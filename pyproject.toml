@@ -1,24 +1,32 @@
-[tool.poetry]
+[tool.pdm.build]
+includes = [
+    "dynamic_mode_decomposition",
+]
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[project]
+authors = [
+    {name = "Kenneth Allen", email = "kencubed@gmail.com"},
+]
+license = {text = "MIT"}
+requires-python = "<4.0,>=3.11"
+dependencies = [
+    "numpy<2.0.0,>=1.25.2",
+    "pandas<3.0.0,>=2.0.3",
+    "matplotlib<4.0.0,>=3.7.2",
+    "jupyter<2.0.0,>=1.0.0",
+    "scikit-learn<2.0.0,>=1.3.0",
+]
 name = "dynamic-mode-decomposition"
 version = "0.1.0"
 description = "A demo of the dynamic mode decomposition."
-authors = ["Kenneth Allen <kencubed@gmail.com>"]
 readme = "README.md"
-license = "MIT"
-packages = [{include = "dynamic_mode_decomposition"}]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-numpy = "^1.25.2"
-pandas = "^2.0.3"
-matplotlib = "^3.7.2"
-jupyter = "^1.0.0"
-scikit-learn = "^1.3.0"
-
-[tool.poetry.dev-dependencies]
-pytest = "^6.2.4"
-jupyter = "^1.0.0"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+dev = [
+    "pytest<7.0.0,>=6.2.4",
+    "jupyter<2.0.0,>=1.0.0",
+]

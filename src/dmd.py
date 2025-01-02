@@ -14,7 +14,7 @@ def dmd(data: np.ndarray, rank: int) -> tuple[np.ndarray, np.ndarray]:
     Tuple[np.ndarray, np.ndarray]: Eigenvalues and DMD modes of the dataset.
 
     Example:
-    >>> eig_values, dmd_modes = dmd(np.random.rand(100, 10), 5)
+        eig_values, dmd_modes = dmd(np.random.rand(100, 10), 5)
     '''
     if rank > min(data.shape):
         raise ValueError("The rank must be smaller than each dimension of the data.")

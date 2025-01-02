@@ -3,7 +3,7 @@
 
 import pytest
 import numpy as np
-from dynamic_mode_decomposition import dmd
+from src import dmd
 
 @pytest.fixture
 def example_upper_triangular_matrix():

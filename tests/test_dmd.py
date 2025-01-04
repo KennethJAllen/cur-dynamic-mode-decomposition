@@ -1,6 +1,4 @@
 '''Tests for dmd.py'''
-# pylint: disable=redefined-outer-name
-
 import pytest
 import numpy as np
 from src import dmd

@@ -18,8 +18,8 @@ def cur_decomposition(data: np.ndarray,
     return columns, submatrix, rows
 
 def alternating_maxvol(data: np.ndarray,
-                       initial_row_indices: np.ndarray = None,
-                       initial_column_indices: np.ndarray = None) -> tuple[np.ndarray, np.ndarray]:
+                       initial_row_indices: np.ndarray,
+                       initial_column_indices: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
     """
     Algorithm based on paper "How to Find a Good Submatrix" by Goreinov, Sergei A., et al.
     Alternating version of the one directional maxvol algorithm, modified for two-directional search.
@@ -43,6 +43,7 @@ def alternating_maxvol(data: np.ndarray,
     max_num_iterations = 1000
 
     for k in range(max_num_iterations):
+        # Find dominant submatrix in column
         Yh = LA.solve(submatrix.T, data[:,column_indices].T)
         Y = Yh.T # Y =  data[:,J]A^{-1}
         Ya = np.abs(Y) # entry-wise absolute value of Y
@@ -59,6 +60,7 @@ def alternating_maxvol(data: np.ndarray,
         else:
             column_dom = True # indicates that A is near dominant in columns
 
+        # Find dominant submatrix in row
         Z = LA.solve(submatrix, data[row_indices,:]) #Z = A^{-1}data[I,:]
         Za = np.abs(Z) # entry-wise absolute value of Z
         z = np.amax(Za) # largest element of Z in modulus
@@ -75,5 +77,5 @@ def alternating_maxvol(data: np.ndarray,
             row_dom = True # indicates that A is near dominant in rows
 
         if k == max_num_iterations-1:
-            raise ValueError(f"alt_maxvol did not converge in {max_num_iterations} steps")
+            raise ValueError(f"Did not converge in {max_num_iterations} steps.")
     return row_indices, column_indices

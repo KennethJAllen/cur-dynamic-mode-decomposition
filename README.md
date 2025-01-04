@@ -2,9 +2,11 @@
 
 ## Summary
 
-An implementation of the columns-submatrix-row (CUR)-based dynamic mode decomposition (DMD), originally developed by Kenneth Allen and Sebastian De Pascuale in 2021 as part of the SCGSR research fellowship with results published in [[1]](#references).
+- An implementation of the columns-submatrix-row (CUR)-based dynamic mode decomposition (DMD).
 
 - The CUR DMD provides a fast and interpretable framework for generating and compressing timeseries dynamics.
+
+- Originally developed by Kenneth Allen and Sebastian De Pascuale in 2021 as part of the SCGSR research fellowship with results published in [[1]](#references).
 
 ## 🔧 Installation
 
@@ -23,7 +25,7 @@ cd dynamic-mode-decomposition
 uv sync
 ```
 ## Dynamic Mode Decomposition
-The dynamic mode decomposition, originally developed for fluid dynamics simulation, was designed to extract features from high dimensional data.
+The dynamic mode decomposition, originally developed for simulating fluid dynamics, was designed to extract features from high dimensional data.
 
 Given a collection of $n$ dimensional data vectors $x_i$, suppose the dynamics evolve linearly. That is, there exists an $n \times n$ linear operator $A$ such that $x_i = A x_{i-1}$. For large $n$, calculating and storing $A$ can be prohibitive. The DMD outputs the leading eigenvectors (known as the DMD modes) and eigenvalues of $A$ without explicitly calculating $A$, and thus allows us to approximate the dynamics of $A$.
 

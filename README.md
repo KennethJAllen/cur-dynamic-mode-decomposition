@@ -6,7 +6,7 @@
 
 - The CUR DMD provides a fast and interpretable framework for generating and compressing timeseries dynamics.
 
-- Originally developed by Kenneth Allen and Sebastian De Pascuale in 2021 as part of the SCGSR research fellowship with results published in [[1]](#references).
+- Originally developed by K. Allen and S. De Pascuale in 2021 as part of the SCGSR research fellowship with results published in [[1]](#references).
 
 ## 🔧 Installation
 

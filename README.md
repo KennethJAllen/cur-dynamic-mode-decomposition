@@ -1,4 +1,4 @@
-# Dynamic Mode Decomposition
+# CUR Dynamic Mode Decomposition
 
 ## Summary
 

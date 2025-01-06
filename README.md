@@ -41,11 +41,10 @@ The dynamic mode decomposition, originally developed for simulating fluid dynami
 Given a collection of data vectors $\{z_0, \dots, z_n\}$, suppose the dynamics evolve linearly. That is, there exists an $n \times n$ linear operator $A$ such that $z_i = A z_{i-1}$.
 
 Letting
-$$
-\begin{align}
-X &= [z_0, \dots, z_{n-1}] \\
-Y &= [z_1, \dots, z_n]
-\end{align}$$
+
+$$X = [z_0, \dots, z_{n-1}]$$
+
+$$Y = [z_1, \dots, z_n]$$
 
 We can define
 
@@ -61,15 +60,15 @@ Instead of calculating the full $A$, we can calculate a smaller matrix $\tilde{A
 
 The traditional way of computing $\tilde{A}$ is with the SVD.
 
-Given a desired rank $r$, calculate $X_r = U \Sigma V^*$, where $\Sigma$ consists of the top $r$ singular values and $U$ and $V^*$ are the corresponding singular vectors.
+Given a desired rank $r$, calculate $X_r = U \Sigma V^\*$, where $\Sigma$ consists of the top $r$ singular values and $U$ and $V^\*$ are the corresponding singular vectors.
 
 Then the $r \times r$ matrix $\tilde{A}$ is given by
 
-$$\tilde{A} = U^*YV\Sigma^{-1}.$$
+$$\tilde{A} = U^\*YV\Sigma^{-1}.$$
 
 To forecast the data vectors $\{z_i\}$, we have the formula
 
-$$\hat{z}_{n+N} = U \tilde{A}^N U^* z_n.$$
+$$\hat{z}_{n+N} = U \tilde{A}^N U^\* z_n.$$
 
 For theoretical results, see [[3]](#references).
 
@@ -92,7 +91,7 @@ For theoretical results, see [[2]](#references).
 ## Examples
 
 ### M5 Competition
-The M5 competition was a times series forecasting competition held in 2020, with the objective of advancing the theory and practice of time series forecasting methods. The M5 data, made available by Walmart, consists of the unit sales of $3049$ products sold across $10$ stores over $1941$ days. Thus, our data matrix is $30490 \times 1941$. The goal of the competition is to predict the unit sales of products at each store $28$ days ahead.
+The M5 competition was a times series forecasting competition held in 2020, with the objective of advancing the theory and practice of time series forecasting methods. The M5 data, made available by Walmart, consists of the unit sales of 3049 products sold across 10 stores over 1941 days. Thus, our data matrix is $30490 \times 1941$. The goal of the competition is to predict the unit sales of products at each store 28 days ahead.
 
 ## Sources
 

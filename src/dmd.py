@@ -3,7 +3,7 @@ including the CUR DMD developed by K. Allen and S. De Pascuale."""
 import numpy as np
 from numpy import linalg as LA
 import sklearn.utils.extmath as skmath
-from src import maxvol_cur as mc
+import maxvol_cur as mc
 
 def cur_dmd(data: np.ndarray,
             rank: int,
@@ -126,7 +126,6 @@ def forecast(data: np.ndarray, rank: int, num_forecasts: int, cur_or_svd: str = 
         eig_values, dmd_modes = svd_dmd(data, rank)
     else:
         raise ValueError(f"cur_or_svd must be 'cur' or 'svd'. Instead got {cur_or_svd}.")
-    diag_eig_values = np.diag(eig_values)
 
     initial_condition = data[:,-1] # uses last vector in data for initial condition
     data_dimension = initial_condition.shape[0]
@@ -135,8 +134,8 @@ def forecast(data: np.ndarray, rank: int, num_forecasts: int, cur_or_svd: str = 
     # time stepping
     low_dim_forecast = LA.lstsq(dmd_modes, initial_condition, rcond=None)[0]
     for t in range(num_forecasts):
-        low_dim_forecast = diag_eig_values @ low_dim_forecast
-        forecast_results[:,t] =  dmd_modes @ low_dim_forecast
+        low_dim_forecast = eig_values * low_dim_forecast
+        forecast_results[:, t] =  dmd_modes @ low_dim_forecast
 
     forecast_results = forecast_results.real # take real component of results
     return forecast_results

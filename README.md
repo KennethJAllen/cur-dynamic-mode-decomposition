@@ -20,7 +20,7 @@ cd dynamic-mode-decomposition
 ### Install Dependencies with UV:
 
 *   [Install UV](https://docs.astral.sh/uv/#highlights) if not already installed.
-*   Run the following command in the project directory:
+*   Create the virtual environment::
 
 ```
 uv sync
@@ -38,7 +38,7 @@ To forecast timeseries data, use the `forecast` function in `dmd.py`.
 ## Dynamic Mode Decomposition
 The dynamic mode decomposition, originally developed for simulating fluid dynamics, was designed to extract features from high dimensional data.
 
-Given a collection of data vectors $\{z_0, \dots, z_n\}$, suppose the dynamics evolve linearly. That is, there exists an $n \times n$ linear operator $A$ such that $z_i = A z_{i-1}$.
+Given a collection of data vectors $\{z _0, \dots, z_n\}$, suppose the dynamics evolve linearly. That is, there exists an $n \times n$ linear operator $A$ such that $z_i = A z_{i-1}$.
 
 Letting
 

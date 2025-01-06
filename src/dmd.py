@@ -119,7 +119,6 @@ def svd_dmd(data: np.ndarray, rank: int) -> tuple[np.ndarray, np.ndarray]:
 def forecast(data: np.ndarray, rank: int, num_forecasts: int, cur_or_svd: str = 'cur'):
     """Forecast timeseries data using the dynamic mode decomposition of given rank."""
     # TODO: Verify that dmd modes should not be scaled by eigenvalues
-    # TODO: refactor multiplying by eigenvalues so it does not multiply by a diagonal matrix.
     if cur_or_svd == 'cur':
         eig_values, dmd_modes = cur_dmd(data, rank)
     elif cur_or_svd == 'svd':

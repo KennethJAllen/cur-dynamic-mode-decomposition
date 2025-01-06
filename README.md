@@ -19,7 +19,7 @@ cd dynamic-mode-decomposition
 
 ### Install Dependencies with UV:
 
-*   Install UV if not already installed.
+*   [Install UV](https://docs.astral.sh/uv/#highlights) if not already installed.
 *   Run the following command in the project directory:
 
 ```

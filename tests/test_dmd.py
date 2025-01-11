@@ -1,7 +1,7 @@
 """Tests for dmd.py"""
 import pytest
 import numpy as np
-import dmd
+from src import dmd
 
 @pytest.fixture(name='upper_triangular_matrix')
 def fixture_upper_triangular_matrix():

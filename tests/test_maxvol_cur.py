@@ -1,7 +1,7 @@
 """Tests for maxvol_cur.py"""
 import pytest
 import numpy as np
-import maxvol_cur as mc
+from src import maxvol_cur as mc
 
 @pytest.fixture(name='upper_triangular_matrix')
 def fixture_upper_triangular_matrix():

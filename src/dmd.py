@@ -3,12 +3,13 @@ including the CUR DMD developed by K. Allen and S. De Pascuale."""
 import numpy as np
 from numpy import linalg as LA
 import sklearn.utils.extmath as skmath
-import maxvol_cur as mc
+from src import maxvol_cur as mc
 
 def cur_dmd(data: np.ndarray,
             rank: int,
-            initial_row_indices: np.ndarray = None,
-            initial_column_indices: np.ndarray = None) -> tuple[np.ndarray, np.ndarray]:
+            row_indices: np.ndarray = None,
+            column_indices: np.ndarray = None,
+            validate_initial_indices: bool = False) -> tuple[np.ndarray, np.ndarray]:
     """
     Performs the column-submatrix-row (CUR) based dynamic mode decomposition (DMD) on n x p time series data.
     If initial row or column indices are not supplied, they will be chosen randomly.
@@ -18,6 +19,8 @@ def cur_dmd(data: np.ndarray,
         rank (int): Number of singular values for SVD decomposition
         initial_row_indices(np.ndarray, optional): Initial row indices for maxvol algorithm
         initial_column_indices(np.ndarray, optional): Initial column for maxvol algorithm
+        validate_initial_indices(bool, optional): Ensures initial indices for Maxvol algorithm are valid.
+            If True, this can take extra compute time.
 
     Returns:
         DMD eigenvalues and DMD modes of the dataset.
@@ -30,7 +33,15 @@ def cur_dmd(data: np.ndarray,
     y = data[:,1:] # All but first column
 
     # If the initial indices are not valid or do not exist, get valid ones
-    row_indices, column_indices = get_valid_initial_indices(x, rank, initial_row_indices, initial_column_indices)
+    if validate_initial_indices:
+        row_indices, column_indices = get_valid_initial_indices(x, rank, row_indices, column_indices)
+    else:
+        n, p = x.shape
+        if row_indices is None:
+            row_indices = np.random.randint(n, size=rank)
+        if column_indices is None:
+            column_indices = np.random.randint(p, size=rank)
+
     optimal_row_indices, optimal_column_indices = mc.alternating_maxvol(x, row_indices, column_indices)
     c, u, r = mc.cur_decomposition(x, optimal_row_indices, optimal_column_indices)
 
@@ -124,7 +135,7 @@ def forecast(data: np.ndarray, rank: int, num_forecasts: int, cur_or_svd: str = 
     elif cur_or_svd == 'svd':
         eig_values, dmd_modes = svd_dmd(data, rank)
     else:
-        raise ValueError(f"cur_or_svd must be 'cur' or 'svd'. Instead got {cur_or_svd}.")
+        raise ValueError(f"'cur_or_svd' must be 'cur' or 'svd'. Instead got {cur_or_svd}.")
 
     initial_condition = data[:,-1] # uses last vector in data for initial condition
     data_dimension = initial_condition.shape[0]

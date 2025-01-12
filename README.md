@@ -35,6 +35,20 @@ To forecast timeseries data, use the `forecast` function in `dmd.py`.
 - `num_forecasts`: The number of time steps to forecast out.
 - `cur_or_svd`: A string `cur` for the CUR based DMD or `svd` for the SVD based DMD.
 
+## Fluid Dynamics Demo
+in `.demo/fluid_dynamics_demo.py` there is a sample fluid dynamics simulation.
+
+Synthetic fluid data generated is composed of three modes:
+- A rotation vortex
+- A standing wave
+- A traveling wave
+
+![Synthetic Fluid Dynamics Data](demo/fluid_evolutions/synthetic_fluid_data.gif)
+
+Two forecasts are generated, one using the CUR based dynamic mode decomposition and one using the SVD based dynamic mode decomposition. The resulting comparision is saved as a gif.
+
+![Forecasted Data](demo/fluid_evolutions/rank_15_dmd_forecasts.gif)
+
 ## Dynamic Mode Decomposition
 The dynamic mode decomposition, originally developed for simulating fluid dynamics, was designed to extract features from high dimensional data.
 
@@ -87,11 +101,6 @@ To forecast the data vectors $\{z_i\}$, we have the formula
 $$\hat{z}_{n+N} = C \tilde{A}^N C^\dagger z_n.$$
 
 For theoretical results, see [[2]](#references).
-
-## Examples
-
-### M5 Competition
-The M5 competition was a times series forecasting competition held in 2020, with the objective of advancing the theory and practice of time series forecasting methods. The M5 data, made available by Walmart, consists of the unit sales of 3049 products sold across 10 stores over 1941 days. Thus, our data matrix is $30490 \times 1941$. The goal of the competition is to predict the unit sales of products at each store 28 days ahead.
 
 ## Sources
 

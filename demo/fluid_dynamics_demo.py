@@ -63,8 +63,8 @@ def generate_fluid_data(dims: tuple[int] = (100, 100), nt: int=200, noise_level=
 
 def calculate_forecast_error(actual: np.ndarray, predicted: np.ndarray) -> np.ndarray:
     """
-    Calculates the error at each time step between actual data and forecasted data.
-    input:5
+    Calculates the mean absolute error at each time step between actual data and forecasted data.
+    input:
         actual (np.ndarray): n x t actual timeseries data
         predicted (np.ndarray): n x t forecasted timeseries data
     output:
@@ -134,7 +134,7 @@ def create_animation(forecasts: dict[str,np.ndarray],
             pcm.set_array(field.ravel())
             if errors is not None and title in errors:
                 error = errors[title][frame]
-                title_with_error = f"{title} Error: {error:.1e}"
+                title_with_error = f"{title} MAE: {error:.1e}"
                 ax.set_title(title_with_error)
         return pcms
 

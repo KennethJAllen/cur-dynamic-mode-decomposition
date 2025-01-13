@@ -38,14 +38,18 @@ To forecast timeseries data, use the `forecast` function in `dmd.py`.
 ## Fluid Dynamics Demo
 in `.demo/fluid_dynamics_demo.py` there is a sample fluid dynamics simulation.
 
-Synthetic fluid data generated is composed of three modes:
+Synthetic fluid data generated is composed of three modes plus noise:
 - A rotation vortex
 - A standing wave
 - A traveling wave
 
+Each frame is $100 \times 100$, and $200$ frames are produced.
+
 ![Synthetic Fluid Dynamics Data](demo/fluid_evolutions/synthetic_fluid_data.gif)
 
-Two forecasts are generated, one using the CUR based dynamic mode decomposition and one using the SVD based dynamic mode decomposition. The resulting comparision is saved as a gif.
+Two forecasts are generated using the first $150$ frames, one using the CUR based dynamic mode decomposition and one using the SVD based dynamic mode decomposition.
+
+The result is two $50$ frame forecasts.
 
 ![Forecasted Data](demo/fluid_evolutions/rank_15_dmd_forecasts.gif)
 

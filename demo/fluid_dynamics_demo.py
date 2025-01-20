@@ -99,16 +99,14 @@ def create_animation(forecasts: dict[str,np.ndarray],
     X, Y = meshgrid
 
     # Set up the figure
-    n_plots = len(forecasts)
-    fig_width = min(5, 20/n_plots) * n_plots
-    fig_height = 5
-    fig = plt.figure(figsize=(fig_width, fig_height))
+    fig_dim = int(np.ceil(np.sqrt(len(forecasts))))
+    fig = plt.figure(figsize=(5*fig_dim, 5*fig_dim))
 
     axes = []
     pcms = []
 
     for index, (title, forecast) in enumerate(forecasts.items()):
-        ax = fig.add_subplot(1, len(forecasts), index+1)
+        ax = fig.add_subplot(fig_dim, fig_dim, index+1)
         axes.append(ax)
 
         field = forecast[:, 0].reshape(X.shape)
@@ -118,9 +116,8 @@ def create_animation(forecasts: dict[str,np.ndarray],
         ax.set_title(title)
         ax.axis('equal')
 
-    #fig.colorbar(pcms[0], ax=axes, label='Field Value')
     plt.tight_layout()
-    plt.subplots_adjust(top=0.85)  # Creates space for the suptitle
+    plt.subplots_adjust(top=0.9)  # Creates space for the suptitle
     fig.suptitle(animation_title)
 
     # Animation update function

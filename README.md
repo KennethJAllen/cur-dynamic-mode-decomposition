@@ -108,8 +108,8 @@ For theoretical results, see [[2]](#references).
 
 ## Sources
 
-- [1] De Pascuale, Sebastian, et al. "Compression of tokamak boundary plasma simulation data using a maximum volume algorithm for matrix skeleton decomposition." Journal of Computational Physics 484 (2023): 112089.
+- [1] De Pascuale, S., **Allen, K.**, Green, D. L., & Lore, J. D. (2023). Compression of tokamak boundary plasma simulation data using a maximum volume algorithm for matrix skeleton decomposition. Journal of Computational Physics, 484, 112089.
 
-- [2] Allen, Kenneth. A geometric approach to low-rank matrix and tensor completion. Diss. University of Georgia, 2021.
+- [2] **Allen, Kenneth.** A geometric approach to low-rank matrix and tensor completion. Diss. University of Georgia, 2021.
 
 - [3] Tu, Jonathan H. Dynamic mode decomposition: Theory and applications. Diss. Princeton University, 2013.
